@@ -1,0 +1,10 @@
+{
+    "ciudades": [
+      { "id": 1, "nombre": "Bogotá", "pais": "Colombia" },
+      { "id": 2, "nombre": "Buenos Aires", "pais": "Argentina" }
+    ],
+    "climas": [
+      { "id": 1, "ciudad_id": 1, "temperatura": 20, "humedad": 80, "presion": 1012, "fecha_actualizacion": "2024-11-29T12:00:00Z" }
+    ]
+  }
+  

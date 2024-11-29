@@ -1,0 +1,135 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Clima",
+      "version": "1.0.0",
+      "description": "API para gestionar datos del clima de ciudades"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000",
+        "description": "Servidor local"
+      }
+    ],
+    "paths": {
+      "/v1/ciudad": {
+        "post": {
+          "summary": "Agregar una nueva ciudad",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nombre": { "type": "string" },
+                    "pais": { "type": "string" }
+                  },
+                  "required": ["nombre", "pais"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Ciudad creada exitosamente",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id": 1,
+                    "nombre": "Lima",
+                    "pais": "Perú"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error en los datos enviados"
+            }
+          }
+        }
+      },
+      "/v1/clima": {
+        "get": {
+          "summary": "Consultar información del clima",
+          "parameters": [
+            {
+              "name": "pais",
+              "in": "query",
+              "required": true,
+              "schema": { "type": "string" }
+            },
+            {
+              "name": "ciudad",
+              "in": "query",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Información del clima encontrada",
+              "content": {
+                "application/json": {
+                  "example": [
+                    {
+                      "id": 1,
+                      "ciudad_id": 1,
+                      "temperatura": 25,
+                      "humedad": 80,
+                      "presion": 1013,
+                      "fecha_actualizacion": "2024-11-29T15:30:00.000Z"
+                    }
+                  ]
+                }
+              }
+            },
+            "404": {
+              "description": "Ciudad no encontrada"
+            }
+          }
+        },
+        "post": {
+          "summary": "Agregar información del clima para una ciudad",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ciudad_id": { "type": "integer" },
+                    "temperatura": { "type": "number" },
+                    "humedad": { "type": "integer" },
+                    "presion": { "type": "integer" }
+                  },
+                  "required": ["ciudad_id", "temperatura", "humedad", "presion"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Registro de clima creado exitosamente",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "id": 1,
+                    "ciudad_id": 1,
+                    "temperatura": 25,
+                    "humedad": 80,
+                    "presion": 1013,
+                    "fecha_actualizacion": "2024-11-29T15:30:00.000Z"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Error en los datos enviados"
+            }
+          }
+        }
+      }
+    }
+  }
+  
